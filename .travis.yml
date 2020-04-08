@@ -1,10 +1,10 @@
 language: node_js
 node_js:
-  - 10
+  - 8
 before_install:
   - curl -sL https://firebase.tools | bash
 install:
-  - npm install --build-from-source
-  - npm rebuild --target=10.20.0 --target_platform=linux --target_arch=x64 --target_libc=glibc --update-binary
+  - rm -rf node_modules
+  - npm install
 script:
   - npm test
