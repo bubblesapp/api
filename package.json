@@ -8,7 +8,6 @@
     "clean": "rm -r lib/",
     "build": "npm run clean && tsc",
     "pretest": "npm run build",
-    "log": "echo 'Hello World'",
     "test": "firebase emulators:exec --only firestore './test.sh'"
   },
   "repository": {
@@ -31,7 +30,7 @@
     "@types/chai": "^4.2.11",
     "@types/chance": "^1.0.10",
     "@types/i18n-js": "^3.0.2",
-    "@types/mocha": "^7.0.2",
+    "@types/jest": "^25.2.1",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
     "chai": "^4.2.0",
@@ -39,7 +38,7 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-prettier": "^3.1.2",
-    "mocha": "^7.1.1",
+    "jest": "^25.3.0",
     "prettier": "^2.0.4",
     "typescript": "^3.8.3"
   }
