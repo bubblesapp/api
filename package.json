@@ -8,7 +8,8 @@
     "clean": "rm -r lib/",
     "build": "npm run clean && tsc",
     "pretest": "npm run build",
-    "test": "firebase emulators:exec --only firestore './test.sh'"
+    "log": "echo 'Hello World'",
+    "test": "firebase emulators:exec --only firestore 'npm run log'"
   },
   "repository": {
     "type": "git",
