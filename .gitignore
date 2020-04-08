@@ -1,6 +1,8 @@
 # Typescript v1 declaration files
 typings/
 
+.idea
+
 node_modules/
 
 service-account.json
