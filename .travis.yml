@@ -4,7 +4,7 @@ node_js:
 before_install:
   - curl -sL https://firebase.tools | bash
 install:
-  - npm install
+  - npm install --build-from-source
   - npm rebuild --target=10.20.0 --target_platform=linux --target_arch=x64 --target_libc=glibc --update-binary
 script:
   - npm test
