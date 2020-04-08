@@ -7,7 +7,7 @@ import {API, FirebaseAPI} from '../';
 import {App} from '../src/firebase/FirestoreTypes';
 
 export const rules = fs.readFileSync(
-  path.resolve(__dirname, '../../firestore.rules'), // Path to rules from lib/
+  path.resolve(__dirname, '../firestore.rules'), // Path to rules from lib/
   'utf8',
 );
 
