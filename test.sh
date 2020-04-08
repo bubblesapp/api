@@ -1,2 +1,1 @@
-# mocha "./lib/__tests__/*.js"
-jest --runInBand
+mocha "./lib/test/**/*.js"
