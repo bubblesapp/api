@@ -9,6 +9,9 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
+            - run:
+              name: "Installing firebase tools"
+              command: curl -sL https://firebase.tools | bash
             - run: npm install
             - run: npm test
 workflows:

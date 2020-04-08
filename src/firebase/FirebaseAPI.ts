@@ -10,7 +10,7 @@ import {FirebaseNotificationsAPI} from './FirebaseNotificationsAPI';
 
 export class FirebaseAPI extends FirestoreAPI implements API {
   constructor(
-    protected app: App,
+    public app: App,
     public profiles = new FirebaseProfilesAPI(app),
     public friends = new FirebaseFriendsAPI(app),
     public invites = new FirebaseInvitesAPI(app),
