@@ -8,7 +8,7 @@ import { FirestoreAPI } from './FirestoreAPI';
 import { FirebaseDevicesAPI } from './FirebaseDevicesAPI';
 import { FirebaseNotificationsAPI } from './FirebaseNotificationsAPI';
 export declare class FirebaseAPI extends FirestoreAPI implements API {
-    protected app: App;
+    app: App;
     profiles: FirebaseProfilesAPI;
     friends: FirebaseFriendsAPI;
     invites: FirebaseInvitesAPI;
