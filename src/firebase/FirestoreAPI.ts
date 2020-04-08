@@ -1,4 +1,5 @@
 import {
+  App,
   CollectionReference,
   DocumentReference,
   DocumentSnapshot,
@@ -8,7 +9,7 @@ import {
 } from './FirestoreTypes';
 
 export abstract class FirestoreAPI {
-  protected constructor(protected firestore: Firestore) {}
+  protected constructor(protected app: App) {}
 
   protected waitUntilDocument = async (
     documentReference: DocumentReference,
@@ -49,7 +50,7 @@ export abstract class FirestoreAPI {
     });
   };
 
-  protected usersRef = (): CollectionReference => this.firestore.collection('users');
+  protected usersRef = (): CollectionReference => this.app.firestore().collection('users');
 
   protected userRef = (uid: string): DocumentReference => this.usersRef().doc(uid);
 
@@ -71,16 +72,17 @@ export abstract class FirestoreAPI {
   protected outgoingInviteQuery = (fromUid: string, toEmail: string): Query =>
     this.outgoingInvitesRef(fromUid).where('to', '==', toEmail);
 
-  protected emailInvitesRef = (): CollectionReference => this.firestore.collection('emailInvites');
+  protected emailInvitesRef = (): CollectionReference =>
+    this.app.firestore().collection('emailInvites');
 
   protected emailInviteQuery = (fromUid: string, toEmail: string): Query =>
     this.emailInvitesRef().where('from', '==', fromUid).where('to', '==', toEmail);
 
-  protected profilesRef = (): CollectionReference => this.firestore.collection('profiles');
+  protected profilesRef = (): CollectionReference => this.app.firestore().collection('profiles');
 
   protected profileRef = (uid: string): DocumentReference => this.profilesRef().doc(uid);
 
-  protected bubblesRef = (): CollectionReference => this.firestore.collection('bubbles');
+  protected bubblesRef = (): CollectionReference => this.app.firestore().collection('bubbles');
 
   protected bubbleRef = (uid: string): DocumentReference => this.bubblesRef().doc(uid);
 

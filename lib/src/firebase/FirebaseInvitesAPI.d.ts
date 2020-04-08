@@ -1,9 +1,9 @@
 import { Invite } from '../models/Invite';
 import { InvitesAPI } from '../InvitesAPI';
 import { FirestoreAPI } from './FirestoreAPI';
-import { Firestore } from './FirestoreTypes';
+import { App } from './FirestoreTypes';
 export declare class FirebaseInvitesAPI extends FirestoreAPI implements InvitesAPI {
-    constructor(firestore: Firestore);
+    constructor(app: App);
     setIncoming: (toUid: string, invite: Invite) => Promise<void>;
     deleteIncoming: (toUid: string, fromUid: string) => Promise<void>;
     existsIncoming: (toUid: string, fromUid: string) => Promise<boolean>;

@@ -1,6 +1,6 @@
-import {Profile} from '../../../src/models/Profile';
-import {beforeAllTests, beforeEachTest, chance, createAdminAPI} from '../../../../cloud/__tests__';
-import {API} from '../../../src/API/API';
+import {Profile} from '../../../src/models';
+import {beforeAllTests, beforeEachTest, chance, createAdminAPI} from '../../';
+import {API} from '../../..';
 
 describe('API.profiles.uidWithEmail', () => {
   let adminAPI: API;

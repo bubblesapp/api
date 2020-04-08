@@ -1,6 +1,9 @@
 import admin from 'firebase-admin';
 import * as firebaseTesting from '@firebase/testing';
-export declare type Firestore = admin.firestore.Firestore | firebaseTesting.firestore.Firestore;
+import firebase from 'firebase';
+export declare type App = admin.app.App | firebase.app.App;
+export declare type f = Omit<admin.firestore.Firestore, 'getAll' | 'listCollections'>;
+export declare type Firestore = f | firebaseTesting.firestore.Firestore;
 export declare type DocumentReference = admin.firestore.DocumentReference | firebaseTesting.firestore.DocumentReference;
 export declare type CollectionReference = admin.firestore.CollectionReference | firebaseTesting.firestore.CollectionReference;
 export declare type Query = admin.firestore.Query | firebaseTesting.firestore.Query;

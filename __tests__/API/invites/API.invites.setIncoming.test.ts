@@ -1,6 +1,6 @@
-import {Invite} from '../../../src/models/Invite';
-import {beforeAllTests, beforeEachTest, chance, createAdminAPI} from '../../../../cloud/__tests__';
-import {API} from '../../../src/API/API';
+import {Invite} from '../../../src/models';
+import {beforeAllTests, beforeEachTest, chance, createAdminAPI} from '../../';
+import {API} from '../../..';
 
 describe('API.invites.setIncoming', () => {
   let adminAPI: API;

@@ -1,6 +1,6 @@
-import {Friend} from '../../../src/models/Friend';
-import {beforeAllTests, beforeEachTest, chance, createAdminAPI} from '../../../../cloud/__tests__';
-import {API} from '../../../src/API/API';
+import {Friend} from '../../../src/models';
+import {beforeAllTests, beforeEachTest, chance, createAdminAPI} from '../../';
+import {API} from '../../..';
 
 describe('API.friends.exists', () => {
   let adminAPI: API;

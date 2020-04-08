@@ -1,11 +1,11 @@
 import {Profile} from '../models/Profile';
 import {ProfilesAPI} from '../ProfilesAPI';
 import {FirestoreAPI} from './FirestoreAPI';
-import {Firestore} from './FirestoreTypes';
+import {App, Firestore} from './FirestoreTypes';
 
 export class FirebaseProfilesAPI extends FirestoreAPI implements ProfilesAPI {
-  constructor(firestore: Firestore) {
-    super(firestore);
+  constructor(app: App) {
+    super(app);
   }
 
   get = async (uid: string): Promise<Profile | undefined> => {

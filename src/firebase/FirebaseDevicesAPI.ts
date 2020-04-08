@@ -1,13 +1,13 @@
 import {FirestoreAPI} from './FirestoreAPI';
-import {Firestore} from './FirestoreTypes';
+import {App, Firestore} from './FirestoreTypes';
 import {Device} from '../models';
 import {DevicesAPI} from '../DevicesAPI';
 import admin from 'firebase-admin';
 import DocumentSnapshot = admin.firestore.DocumentSnapshot;
 
 export class FirebaseDevicesAPI extends FirestoreAPI implements DevicesAPI {
-  constructor(firestore: Firestore) {
-    super(firestore);
+  constructor(app: App) {
+    super(app);
   }
 
   get = async (uid: string, id: string): Promise<Device | undefined> => {

@@ -1,26 +1,24 @@
 import {FirebaseProfilesAPI} from './FirebaseProfilesAPI';
 import {API} from '../API';
-import * as firebaseTesting from '@firebase/testing';
 import {FirebaseFriendsAPI} from './FirebaseFriendsAPI';
 import {FirebaseInvitesAPI} from './FirebaseInvitesAPI';
-import {Firestore} from './FirestoreTypes';
+import {App} from './FirestoreTypes';
 import {FirebaseBubbleAPI} from './FirebaseBubbleAPI';
 import {FirestoreAPI} from './FirestoreAPI';
-import admin from 'firebase-admin';
 import {FirebaseDevicesAPI} from './FirebaseDevicesAPI';
 import {FirebaseNotificationsAPI} from './FirebaseNotificationsAPI';
 
 export class FirebaseAPI extends FirestoreAPI implements API {
   constructor(
-    public firestore: Firestore,
-    public profiles = new FirebaseProfilesAPI(firestore),
-    public friends = new FirebaseFriendsAPI(firestore),
-    public invites = new FirebaseInvitesAPI(firestore),
-    public bubble = new FirebaseBubbleAPI(firestore),
-    public devices = new FirebaseDevicesAPI(firestore),
+    protected app: App,
+    public profiles = new FirebaseProfilesAPI(app),
+    public friends = new FirebaseFriendsAPI(app),
+    public invites = new FirebaseInvitesAPI(app),
+    public bubble = new FirebaseBubbleAPI(app),
+    public devices = new FirebaseDevicesAPI(app),
   ) {
-    super(firestore);
-    this.notifications = new FirebaseNotificationsAPI(admin.firestore(), admin.messaging(), this);
+    super(app);
+    this.notifications = new FirebaseNotificationsAPI(app, this);
   }
 
   public notifications: FirebaseNotificationsAPI;
@@ -31,5 +29,5 @@ export class FirebaseAPI extends FirestoreAPI implements API {
     });
 
   destroy = async (): Promise<void> =>
-    await (this.firestore as firebaseTesting.firestore.Firestore).app.delete();
+    await this.app.delete();
 }

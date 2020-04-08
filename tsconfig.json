@@ -6,6 +6,6 @@
     "outDir": "./lib",
     "esModuleInterop": true
   },
-  "include": ["src", "index.ts"],
-  "exclude": ["node_modules", "**/__tests__/*"]
+  "include": ["src", "index.ts", "__tests__"],
+  "exclude": ["node_modules"]
 }

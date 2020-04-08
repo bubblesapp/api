@@ -1,11 +1,11 @@
 import {FirestoreAPI} from './FirestoreAPI';
 import {BubbleAPI} from '../BubbleAPI';
-import {DocumentSnapshot, Firestore} from './FirestoreTypes';
+import {App, DocumentSnapshot, Firestore} from './FirestoreTypes';
 import {Bubble} from '../models/Bubble';
 
 export class FirebaseBubbleAPI extends FirestoreAPI implements BubbleAPI {
-  constructor(firestore: Firestore) {
-    super(firestore);
+  constructor(app: App) {
+    super(app);
   }
 
   get = async (uid: string): Promise<Bubble | undefined> => {

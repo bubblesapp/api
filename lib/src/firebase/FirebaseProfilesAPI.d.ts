@@ -1,9 +1,9 @@
 import { Profile } from '../models/Profile';
 import { ProfilesAPI } from '../ProfilesAPI';
 import { FirestoreAPI } from './FirestoreAPI';
-import { Firestore } from './FirestoreTypes';
+import { App } from './FirestoreTypes';
 export declare class FirebaseProfilesAPI extends FirestoreAPI implements ProfilesAPI {
-    constructor(firestore: Firestore);
+    constructor(app: App);
     get: (uid: string) => Promise<Profile>;
     set: (profile: Profile) => Promise<void>;
     delete: (uid: string) => Promise<void>;

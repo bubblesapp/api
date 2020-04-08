@@ -1,17 +1,13 @@
 import {FirestoreAPI} from './FirestoreAPI';
 import {NotificationsAPI} from '../NotificationsAPI';
-import {Notification} from '../models';
+import {NewInviteNotification, Notification} from '../models';
 import admin from 'firebase-admin';
-import {NewInviteNotification} from '../models';
 import {FirebaseAPI} from './FirebaseAPI';
+import {App} from './FirestoreTypes';
 
 export class FirebaseNotificationsAPI extends FirestoreAPI implements NotificationsAPI {
-  constructor(
-    firestore: admin.firestore.Firestore,
-    private messaging: admin.messaging.Messaging,
-    private parentAPI: FirebaseAPI,
-  ) {
-    super(firestore);
+  constructor(app: App, private parentAPI: FirebaseAPI) {
+    super(app);
   }
 
   newInvite = async (fromUid: string, toUid: string): Promise<void> => {
@@ -41,7 +37,10 @@ export class FirebaseNotificationsAPI extends FirestoreAPI implements Notificati
     if (profile.pushNotificationsEnabled) {
       const devices = await this.parentAPI.devices.list(uid);
       const tokens = devices.map((device) => device.token);
-      const result = await this.messaging.sendToDevice(tokens, payload);
+      const result = await (this.app.messaging() as admin.messaging.Messaging).sendToDevice(
+        tokens,
+        payload,
+      );
       // Cleanup invalid devices
       await Promise.all(
         result.results.map((result, index) => {

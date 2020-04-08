@@ -1,11 +1,11 @@
 import {FriendsAPI} from '../FriendsAPI';
 import {Friend} from '../models/Friend';
 import {FirestoreAPI} from './FirestoreAPI';
-import {DocumentSnapshot, Firestore} from './FirestoreTypes';
+import {App, DocumentSnapshot, Firestore} from './FirestoreTypes';
 
 export class FirebaseFriendsAPI extends FirestoreAPI implements FriendsAPI {
-  constructor(firestore: Firestore) {
-    super(firestore);
+  constructor(app: App) {
+    super(app);
   }
 
   get = async (friendUid: string, ofUid: string): Promise<Friend | undefined> => {

@@ -1,11 +1,11 @@
 import {Invite} from '../models/Invite';
 import {InvitesAPI} from '../InvitesAPI';
 import {FirestoreAPI} from './FirestoreAPI';
-import {DocumentSnapshot, Firestore, QuerySnapshot} from './FirestoreTypes';
+import {App, DocumentSnapshot, Firestore, QuerySnapshot} from './FirestoreTypes';
 
 export class FirebaseInvitesAPI extends FirestoreAPI implements InvitesAPI {
-  constructor(firestore: Firestore) {
-    super(firestore);
+  constructor(app: App) {
+    super(app);
   }
 
   setIncoming = async (toUid: string, invite: Invite): Promise<void> => {
