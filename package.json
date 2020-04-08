@@ -9,7 +9,7 @@
     "build": "npm run clean && tsc",
     "pretest": "npm run build",
     "log": "echo 'Hello World'",
-    "test": "firebase emulators:exec --only firestore 'npm run log'"
+    "test": "firebase emulators:exec --only firestore './test.sh'"
   },
   "repository": {
     "type": "git",
