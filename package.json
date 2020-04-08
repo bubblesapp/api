@@ -8,7 +8,7 @@
     "clean": "rm -r lib/",
     "build": "npm run clean && tsc",
     "pretest": "npm run build",
-    "test": "firebase emulators:exec --only firestore ./test.sh"
+    "test": "firebase emulators:exec --only firestore './test.sh'"
   },
   "repository": {
     "type": "git",

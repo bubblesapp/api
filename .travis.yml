@@ -1,0 +1,4 @@
+before_install:
+  - curl -sL https://firebase.tools | bash
+script:
+  - npm test
