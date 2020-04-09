@@ -5,7 +5,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
-    "clean": "rm -r lib/",
+    "clean": "rm -rf lib/",
     "build": "npm run clean && tsc",
     "pretest": "npm run build",
     "test": "firebase emulators:exec --only firestore './test.sh'"
