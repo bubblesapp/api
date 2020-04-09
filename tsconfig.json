@@ -3,10 +3,12 @@
     "target": "es2017",
     "module": "commonjs",
     "declaration": true,
-    "outDir": "./lib",
+    "outDir": "./dist",
     "esModuleInterop": true
   },
-  "include": ["src", "index.ts",
+  "include": [
+    "src",
+    "index.ts",
     "test"
   ],
   "exclude": ["node_modules"]
