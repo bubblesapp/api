@@ -5,9 +5,9 @@
   "main": "./lib/index.js",
   "scripts": {
     "postinstall": "npm run build",
-    "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
+    "lint": "./node_modules/.bin/tsc --noEmit && ./node_modules/.bin/eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
     "clean": "rm -rf lib/",
-    "build": "npm run clean && tsc",
+    "build": "npm run clean && ./node_modules/.bin/tsc",
     "pretest": "npm run build",
     "test": "firebase emulators:exec --only firestore './test.sh'"
   },
