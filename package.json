@@ -4,7 +4,7 @@
   "description": "API for Bubbles App",
   "main": "./lib/index.js",
   "scripts": {
-    "prepack": "npm run clean && npx tsc",
+    "postinstall": "tsc",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
     "clean": "rm -rf lib/",
     "build": "npm run clean && tsc",
