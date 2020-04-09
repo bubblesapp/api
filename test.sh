@@ -1,1 +1,1 @@
-mocha "./lib/test/**/*.js"
+mocha "./dist/test/**/*.js"
