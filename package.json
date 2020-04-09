@@ -7,7 +7,6 @@
     "**/*"
   ],
   "scripts": {
-    "postinstall": "npm run build",
     "lint": "./node_modules/.bin/tsc --noEmit && ./node_modules/.bin/eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
     "clean": "rm -rf dist/",
     "build": "npm run clean && ./node_modules/.bin/tsc",
