@@ -1,7 +1,7 @@
 import {FriendsAPI} from '../FriendsAPI';
-import {Friend} from '../models/Friend';
+import {Friend} from '../models';
 import {FirestoreAPI} from './FirestoreAPI';
-import {App, DocumentSnapshot, Firestore} from './FirestoreTypes';
+import {App, DocumentSnapshot} from './FirestoreTypes';
 
 export class FirebaseFriendsAPI extends FirestoreAPI implements FriendsAPI {
   constructor(app: App) {

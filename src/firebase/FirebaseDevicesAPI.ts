@@ -1,5 +1,5 @@
 import {FirestoreAPI} from './FirestoreAPI';
-import {App, Firestore} from './FirestoreTypes';
+import {App} from './FirestoreTypes';
 import {Device} from '../models';
 import {DevicesAPI} from '../DevicesAPI';
 import admin from 'firebase-admin';

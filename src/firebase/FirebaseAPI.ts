@@ -28,6 +28,5 @@ export class FirebaseAPI extends FirestoreAPI implements API {
       setTimeout(() => res(), milliseconds);
     });
 
-  destroy = async (): Promise<void> =>
-    await this.app.delete();
+  destroy = async (): Promise<void> => await this.app.delete();
 }

@@ -3,7 +3,6 @@ import {
   CollectionReference,
   DocumentReference,
   DocumentSnapshot,
-  Firestore,
   Query,
   QuerySnapshot,
 } from './FirestoreTypes';
@@ -17,14 +16,16 @@ export abstract class FirestoreAPI {
       snap.exists,
   ): Promise<DocumentSnapshot> => {
     return await new Promise((res, rej) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
       const unsubscribe = documentReference.onSnapshot(
-        (snap) => {
+        (snap: DocumentSnapshot) => {
           if (predicate(snap)) {
             unsubscribe();
             res(snap);
           }
         },
-        (err) => {
+        (err: Error) => {
           rej(err);
         },
       );
@@ -36,6 +37,8 @@ export abstract class FirestoreAPI {
     predicate: (snap: QuerySnapshot) => boolean,
   ): Promise<QuerySnapshot> => {
     return await new Promise((res, rej) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
       const unsubscribe = queryReference.onSnapshot(
         (snap) => {
           if (predicate(snap)) {

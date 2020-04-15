@@ -5,6 +5,8 @@ class FirestoreAPI {
         this.app = app;
         this.waitUntilDocument = async (documentReference, predicate = (snap) => snap.exists) => {
             return await new Promise((res, rej) => {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                // @ts-ignore
                 const unsubscribe = documentReference.onSnapshot((snap) => {
                     if (predicate(snap)) {
                         unsubscribe();
@@ -17,6 +19,8 @@ class FirestoreAPI {
         };
         this.waitUntilQuery = async (queryReference, predicate) => {
             return await new Promise((res, rej) => {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                // @ts-ignore
                 const unsubscribe = queryReference.onSnapshot((snap) => {
                     if (predicate(snap)) {
                         unsubscribe();

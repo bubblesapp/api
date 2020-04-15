@@ -1,4 +1,4 @@
-import { Invite } from '../models/Invite';
+import { Invite } from '../models';
 import { InvitesAPI } from '../InvitesAPI';
 import { FirestoreAPI } from './FirestoreAPI';
 import { App } from './FirestoreTypes';

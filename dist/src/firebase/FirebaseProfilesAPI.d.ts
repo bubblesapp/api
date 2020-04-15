@@ -1,4 +1,4 @@
-import { Profile } from '../models/Profile';
+import { Profile } from '../models';
 import { ProfilesAPI } from '../ProfilesAPI';
 import { FirestoreAPI } from './FirestoreAPI';
 import { App } from './FirestoreTypes';

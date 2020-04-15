@@ -1,7 +1,7 @@
-import {Invite} from '../models/Invite';
+import {Invite} from '../models';
 import {InvitesAPI} from '../InvitesAPI';
 import {FirestoreAPI} from './FirestoreAPI';
-import {App, DocumentSnapshot, Firestore, QuerySnapshot} from './FirestoreTypes';
+import {App, DocumentSnapshot, QuerySnapshot} from './FirestoreTypes';
 
 export class FirebaseInvitesAPI extends FirestoreAPI implements InvitesAPI {
   constructor(app: App) {

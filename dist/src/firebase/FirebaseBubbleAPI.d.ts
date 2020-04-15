@@ -1,7 +1,7 @@
 import { FirestoreAPI } from './FirestoreAPI';
 import { BubbleAPI } from '../BubbleAPI';
 import { App } from './FirestoreTypes';
-import { Bubble } from '../models/Bubble';
+import { Bubble } from '../models';
 export declare class FirebaseBubbleAPI extends FirestoreAPI implements BubbleAPI {
     constructor(app: App);
     get: (uid: string) => Promise<Bubble>;

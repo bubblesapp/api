@@ -37,10 +37,7 @@ export class FirebaseNotificationsAPI extends FirestoreAPI implements Notificati
     if (profile.pushNotificationsEnabled) {
       const devices = await this.parentAPI.devices.list(uid);
       const tokens = devices.map((device) => device.token);
-      const result = await (this.app.messaging() as admin.messaging.Messaging).sendToDevice(
-        tokens,
-        payload,
-      );
+      const result = await (this.app as admin.app.App).messaging().sendToDevice(tokens, payload);
       // Cleanup invalid devices
       await Promise.all(
         result.results.map((result, index) => {
