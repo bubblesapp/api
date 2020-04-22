@@ -10,12 +10,16 @@ export class FirebaseDevicesAPI extends FirestoreAPI implements DevicesAPI {
     super(app);
   }
 
-  get = async (uid: string, id: string): Promise<Device | undefined> => {
-    const snap = await this.deviceRef(uid, id).get();
+  get = async (id: string, uid?: string): Promise<Device | undefined> => {
+    const snap = await this.deviceRef(id, uid).get();
     return snap.exists ? (snap.data() as Device) : undefined;
   };
 
-  list = async (uid: string): Promise<Device[]> => {
+  set = async (device: Device, uid?: string): Promise<void> => {
+    await this.deviceRef(device.id, uid).set(device);
+  };
+
+  list = async (uid?: string): Promise<Device[]> => {
     const docs = await (this.devicesRef(
       uid,
     ) as admin.firestore.CollectionReference).listDocuments();
@@ -25,7 +29,7 @@ export class FirebaseDevicesAPI extends FirestoreAPI implements DevicesAPI {
     return snaps.map<Device>((snap) => snap.data() as Device);
   };
 
-  delete = async (uid: string, id: string): Promise<void> => {
-    await this.deviceRef(uid, id).delete();
+  delete = async (id: string, uid?: string): Promise<void> => {
+    await this.deviceRef(id, uid).delete();
   };
 }

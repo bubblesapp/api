@@ -21,7 +21,7 @@ describe('API.profiles.uidWithEmail', () => {
     };
 
     await adminAPI.profiles.set(profile);
-    const result = await adminAPI.profiles.uidWihEmail(profile.email)
+    const result = await adminAPI.profiles.uidWihEmail(profile.email);
     expect(result).to.equal(profile.uid);
   });
 

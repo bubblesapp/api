@@ -1,5 +1,7 @@
 import {
   App,
+  Auth,
+  ClientAuth,
   CollectionReference,
   DocumentReference,
   DocumentSnapshot,
@@ -9,6 +11,17 @@ import {
 
 export abstract class FirestoreAPI {
   protected constructor(protected app: App) {}
+
+  private static isClientAuth(auth: Auth): auth is ClientAuth {
+    return !!(auth as ClientAuth).currentUser;
+  }
+
+  protected uid = (): string | undefined => {
+    const auth = this.app.auth();
+    if (FirestoreAPI.isClientAuth(auth)) {
+      return auth.currentUser?.uid;
+    }
+  };
 
   protected waitUntilDocument = async (
     documentReference: DocumentReference,
@@ -55,43 +68,22 @@ export abstract class FirestoreAPI {
 
   protected usersRef = (): CollectionReference => this.app.firestore().collection('users');
 
-  protected userRef = (uid: string): DocumentReference => this.usersRef().doc(uid);
-
-  protected friendsRef = (ofUid: string): CollectionReference =>
-    this.userRef(ofUid).collection('friends');
-
-  protected friendRef = (friendUid: string, ofUid: string): DocumentReference =>
-    this.friendsRef(ofUid).doc(friendUid);
-
-  protected incomingInvitesRef = (toUid: string): CollectionReference =>
-    this.userRef(toUid).collection('incomingInvites');
-
-  protected incomingInviteRef = (toUid: string, fromUid: string): DocumentReference =>
-    this.incomingInvitesRef(toUid).doc(fromUid);
-
-  protected outgoingInvitesRef = (fromUid: string): CollectionReference =>
-    this.userRef(fromUid).collection('outgoingInvites');
-
-  protected outgoingInviteQuery = (fromUid: string, toEmail: string): Query =>
-    this.outgoingInvitesRef(fromUid).where('to', '==', toEmail);
+  protected userRef = (uid: string = this.uid()): DocumentReference => this.usersRef().doc(uid);
 
   protected emailInvitesRef = (): CollectionReference =>
     this.app.firestore().collection('emailInvites');
 
-  protected emailInviteQuery = (fromUid: string, toEmail: string): Query =>
+  protected emailInviteQuery = (fromUid: string = this.uid(), toEmail: string): Query =>
     this.emailInvitesRef().where('from', '==', fromUid).where('to', '==', toEmail);
 
-  protected profilesRef = (): CollectionReference => this.app.firestore().collection('profiles');
-
-  protected profileRef = (uid: string): DocumentReference => this.profilesRef().doc(uid);
 
   protected bubblesRef = (): CollectionReference => this.app.firestore().collection('bubbles');
 
-  protected bubbleRef = (uid: string): DocumentReference => this.bubblesRef().doc(uid);
+  protected bubbleRef = (uid: string = this.uid()): DocumentReference => this.bubblesRef().doc(uid);
 
-  protected devicesRef = (uid: string): CollectionReference =>
+  protected devicesRef = (uid?: string): CollectionReference =>
     this.userRef(uid).collection('devices');
 
-  protected deviceRef = (uid: string, id: string): DocumentReference =>
+  protected deviceRef = (id: string, uid?: string): DocumentReference =>
     this.devicesRef(uid).doc(id);
 }

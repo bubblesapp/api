@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const FirestoreAPI_1 = require("./FirestoreAPI");
+const rxjs_1 = require("rxjs");
 class FirebaseBubbleAPI extends FirestoreAPI_1.FirestoreAPI {
     constructor(app) {
         super(app);
@@ -30,10 +31,19 @@ class FirebaseBubbleAPI extends FirestoreAPI_1.FirestoreAPI {
         this.pop = async (uid) => {
             await this.bubbleRef(uid).update({ popped: true });
         };
+        this.reset = async (uid) => {
+            await this.bubbleRef(uid).update({ popped: false });
+        };
         this.isPopped = async (uid) => {
             const bubble = await this.get(uid);
             return bubble.isPopped;
         };
+    }
+    observe(uid) {
+        return new rxjs_1.Observable((observer) => 
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        this.bubbleRef(uid).onSnapshot((doc) => observer.next(doc.data()), (err) => observer.error(err)));
     }
 }
 exports.FirebaseBubbleAPI = FirebaseBubbleAPI;

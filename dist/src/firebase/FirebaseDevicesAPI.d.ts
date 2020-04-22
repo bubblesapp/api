@@ -4,7 +4,8 @@ import { Device } from '../models';
 import { DevicesAPI } from '../DevicesAPI';
 export declare class FirebaseDevicesAPI extends FirestoreAPI implements DevicesAPI {
     constructor(app: App);
-    get: (uid: string, id: string) => Promise<Device>;
-    list: (uid: string) => Promise<Device[]>;
-    delete: (uid: string, id: string) => Promise<void>;
+    get: (id: string, uid?: string) => Promise<Device>;
+    set: (device: Device, uid?: string) => Promise<void>;
+    list: (uid?: string) => Promise<Device[]>;
+    delete: (id: string, uid?: string) => Promise<void>;
 }

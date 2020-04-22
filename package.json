@@ -26,11 +26,13 @@
   "types": "./dist/index.d.ts",
   "homepage": "https://github.com/bubblesapp/api#readme",
   "dependencies": {
-    "i18n-js": "^3.5.1"
+    "i18n-js": "^3.5.1",
+    "rxjs": "^6.5.5"
   },
   "optionalDependencies": {
     "@firebase/testing": "^0.18.2",
     "@react-native-firebase/app": "^6.4.0",
+    "@react-native-firebase/auth": "^6.4.0",
     "@react-native-firebase/firestore": "^6.4.0",
     "firebase": "^7.13.2",
     "firebase-admin": "^8.10.0"

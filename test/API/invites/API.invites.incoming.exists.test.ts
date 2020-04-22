@@ -3,7 +3,7 @@ import {beforeAllTests, beforeEachTest, chance, createAdminAPI} from '../../';
 import {API} from '../../..';
 import {expect} from 'chai';
 
-describe('API.invites.existsIncoming', () => {
+describe('API.invites.incoming.exists', () => {
   let adminAPI: API;
   let toUid: string;
   let invite: Invite;
@@ -25,16 +25,16 @@ describe('API.invites.existsIncoming', () => {
   });
 
   it('returns true if an incoming invite exists', async () => {
-    await adminAPI.invites.setIncoming(toUid, invite);
-    const result = await adminAPI.invites.existsIncoming(toUid, invite.from);
+    await adminAPI.invites.incoming.set(invite, toUid);
+    const result = await adminAPI.invites.incoming.exists(invite.from, toUid);
     expect(result).to.be.true;
   });
 
   it("returns false if an incoming invite doesn't exists", async () => {
-    await adminAPI.invites.setIncoming(toUid, invite);
-    const result1 = await adminAPI.invites.existsIncoming(toUid, chance.guid())
+    await adminAPI.invites.incoming.set(invite, toUid);
+    const result1 = await adminAPI.invites.incoming.exists(chance.guid(), toUid);
     expect(result1).to.be.false;
-    const result2 = await adminAPI.invites.existsIncoming(chance.guid(), invite.from)
+    const result2 = await adminAPI.invites.incoming.exists(invite.from, chance.guid());
     expect(result2).to.be.false;
   });
 

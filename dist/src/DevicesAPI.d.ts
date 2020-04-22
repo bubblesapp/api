@@ -1,6 +1,7 @@
-import { Device } from './models/Device';
+import { Device } from './models';
 export interface DevicesAPI {
-    get(uid: string, id: string): Promise<Device>;
-    list(uid: string): Promise<Device[]>;
-    delete(uid: string, id: string): Promise<void>;
+    get(id: string, uid?: string): Promise<Device>;
+    list(uid?: string): Promise<Device[]>;
+    set(device: Device, uid?: string): Promise<void>;
+    delete(id: string, uid?: string): Promise<void>;
 }

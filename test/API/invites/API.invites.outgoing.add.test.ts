@@ -3,7 +3,7 @@ import {beforeAllTests, beforeEachTest, chance, createAdminAPI} from '../../';
 import {API} from '../../..';
 import {expect} from 'chai';
 
-describe('API.invites.setIncoming', () => {
+describe('API.invites.outgoing.add', () => {
   let adminAPI: API;
 
   before(async () => await beforeAllTests());
@@ -13,17 +13,16 @@ describe('API.invites.setIncoming', () => {
     adminAPI = createAdminAPI();
   });
 
-  it('creates the incoming invite', async () => {
+  it('creates the outgoing invite', async () => {
     const invite: Invite = {
       from: chance.guid(),
       to: chance.email(),
       createdAt: new Date().getTime(),
       accepted: false,
     };
-    const toUid = chance.guid();
 
-    await adminAPI.invites.setIncoming(toUid, invite);
-    const result = await adminAPI.invites.existsIncoming(toUid, invite.from);
+    await adminAPI.invites.outgoing.add(invite);
+    const result = await adminAPI.invites.outgoing.exists(invite.to, invite.from);
     expect(result).to.be.true;
   });
 

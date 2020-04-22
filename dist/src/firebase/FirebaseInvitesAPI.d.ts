@@ -1,22 +1,12 @@
-import { Invite } from '../models';
 import { InvitesAPI } from '../InvitesAPI';
 import { FirestoreAPI } from './FirestoreAPI';
 import { App } from './FirestoreTypes';
+import { IncomingInvitesAPI } from '../IncomingInvitesAPI';
+import { OutgoingInvitesAPI } from '../OutgoingInvitesAPI';
+import { EmailInvitesAPI } from '../EmailInvitesAPI';
 export declare class FirebaseInvitesAPI extends FirestoreAPI implements InvitesAPI {
     constructor(app: App);
-    setIncoming: (toUid: string, invite: Invite) => Promise<void>;
-    deleteIncoming: (toUid: string, fromUid: string) => Promise<void>;
-    existsIncoming: (toUid: string, fromUid: string) => Promise<boolean>;
-    addEmail: (invite: Invite) => Promise<string>;
-    existsEmail: (fromUid: string, toEmail: string) => Promise<boolean>;
-    deleteEmail: (fromUid: string, toEmail: string) => Promise<void>;
-    listEmail: (toEmail: string) => Promise<Invite[]>;
-    addOutgoing: (invite: Invite) => Promise<string>;
-    existsOutgoing: (fromUid: string, toEmail: string) => Promise<boolean>;
-    deleteOutgoing: (fromUid: string, toEmail: string) => Promise<void>;
-    accept: (toUid: string, fromUid: string) => Promise<void>;
-    waitUntilIncomingExists: (toUid: string, fromUid: string) => Promise<boolean>;
-    waitUntilOutgoingDeleted: (fromUid: string, toEmail: string) => Promise<boolean>;
-    waitUntilEmailDeleted: (fromUid: string, toEmail: string) => Promise<boolean>;
-    waitUntilIncomingDeleted: (toUid: string, fromUid: string) => Promise<boolean>;
+    incoming: IncomingInvitesAPI;
+    outgoing: OutgoingInvitesAPI;
+    email: EmailInvitesAPI;
 }
