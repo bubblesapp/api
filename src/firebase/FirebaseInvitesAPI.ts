@@ -1,7 +1,7 @@
 import {Invite} from '../models';
 import {InvitesAPI} from '../InvitesAPI';
 import {FirestoreAPI} from './FirestoreAPI';
-import {App, DocumentSnapshot, QuerySnapshot} from './FirestoreTypes';
+import {App} from './FirestoreTypes';
 import {IncomingInvitesAPI} from '../IncomingInvitesAPI';
 import {FirebaseIncomingInvitesAPI} from './FirebaseIncomingInvitesAPI';
 import {OutgoingInvitesAPI} from '../OutgoingInvitesAPI';
@@ -16,4 +16,18 @@ export class FirebaseInvitesAPI extends FirestoreAPI implements InvitesAPI {
   public incoming: IncomingInvitesAPI = new FirebaseIncomingInvitesAPI(this.app);
   public outgoing: OutgoingInvitesAPI = new FirebaseOutgoingInvitesAPI(this.app);
   public email: EmailInvitesAPI = new FirebaseEmailInvitesAPI(this.app);
+
+  invite = async (email: string, fromUid?: string): Promise<void> => {
+    const uid = fromUid ?? this.uid();
+    if (uid) {
+      const invite: Invite = {
+        from: uid,
+        to: email,
+        accepted: false,
+        createdAt: new Date().getTime(),
+      };
+      const id = await this.outgoing.add(invite);
+      await this.email.add(invite, id);
+    }
+  };
 }

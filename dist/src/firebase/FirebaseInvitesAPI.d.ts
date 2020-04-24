@@ -9,4 +9,5 @@ export declare class FirebaseInvitesAPI extends FirestoreAPI implements InvitesA
     incoming: IncomingInvitesAPI;
     outgoing: OutgoingInvitesAPI;
     email: EmailInvitesAPI;
+    invite: (email: string, fromUid?: string) => Promise<void>;
 }

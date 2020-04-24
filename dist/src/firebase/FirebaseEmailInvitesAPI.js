@@ -4,8 +4,15 @@ const FirestoreAPI_1 = require("./FirestoreAPI");
 class FirebaseEmailInvitesAPI extends FirestoreAPI_1.FirestoreAPI {
     constructor() {
         super(...arguments);
-        this.add = async (invite) => {
-            const ref = await this.emailInvitesRef().add(invite);
+        this.add = async (invite, id) => {
+            let ref;
+            if (id) {
+                ref = this.emailInvitesRef().doc(id);
+            }
+            else {
+                ref = this.emailInvitesRef().doc();
+            }
+            await ref.set(invite);
             return ref.id;
         };
         this.exists = async (fromUid, toEmail) => {

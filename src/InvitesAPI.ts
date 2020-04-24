@@ -6,4 +6,5 @@ export interface InvitesAPI {
   outgoing: OutgoingInvitesAPI;
   incoming: IncomingInvitesAPI;
   email: EmailInvitesAPI;
+  invite(email: string, fromUid?: string): Promise<void>;
 }

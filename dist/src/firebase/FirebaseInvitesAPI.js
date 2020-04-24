@@ -10,6 +10,19 @@ class FirebaseInvitesAPI extends FirestoreAPI_1.FirestoreAPI {
         this.incoming = new FirebaseIncomingInvitesAPI_1.FirebaseIncomingInvitesAPI(this.app);
         this.outgoing = new FirebaseOutgoingInvitesAPI_1.FirebaseOutgoingInvitesAPI(this.app);
         this.email = new FirebaseEmailInvitesAPI_1.FirebaseEmailInvitesAPI(this.app);
+        this.invite = async (email, fromUid) => {
+            const uid = fromUid !== null && fromUid !== void 0 ? fromUid : this.uid();
+            if (uid) {
+                const invite = {
+                    from: uid,
+                    to: email,
+                    accepted: false,
+                    createdAt: new Date().getTime(),
+                };
+                const id = await this.outgoing.add(invite);
+                await this.email.add(invite, id);
+            }
+        };
     }
 }
 exports.FirebaseInvitesAPI = FirebaseInvitesAPI;

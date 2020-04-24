@@ -1,11 +1,17 @@
 import {FirestoreAPI} from './FirestoreAPI';
 import {EmailInvitesAPI} from '../EmailInvitesAPI';
 import {Invite} from '../models';
-import {QueryDocumentSnapshot, QuerySnapshot} from './FirestoreTypes';
+import {DocumentReference, QueryDocumentSnapshot, QuerySnapshot} from './FirestoreTypes';
 
 export class FirebaseEmailInvitesAPI extends FirestoreAPI implements EmailInvitesAPI {
-  add = async (invite: Invite): Promise<string> => {
-    const ref = await this.emailInvitesRef().add(invite);
+  add = async (invite: Invite, id?: string): Promise<string> => {
+    let ref: DocumentReference;
+    if (id) {
+      ref = this.emailInvitesRef().doc(id);
+    } else {
+      ref = this.emailInvitesRef().doc();
+    }
+    await ref.set(invite);
     return ref.id;
   };
 
