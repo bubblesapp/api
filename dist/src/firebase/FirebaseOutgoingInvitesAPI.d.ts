@@ -6,10 +6,10 @@ import { Observable } from 'rxjs';
 export declare class FirebaseOutgoingInvitesAPI extends FirestoreAPI implements OutgoingInvitesAPI {
     constructor(app: App);
     protected outgoingInvitesRef: (fromUid?: string) => CollectionReference;
-    protected outgoingInviteQuery: (fromUid: string, toEmail: string) => Query;
+    protected outgoingInviteQuery: (toEmail: string, fromUid?: string) => Query;
     observeAll: (fromUid?: string) => Observable<Invite[]>;
     add: (invite: Invite) => Promise<string>;
     exists: (toEmail: string, fromUid?: string) => Promise<boolean>;
-    delete: (fromUid: string, toEmail: string) => Promise<void>;
-    waitUntilDeleted: (fromUid: string, toEmail: string) => Promise<boolean>;
+    delete: (toEmail: string, fromUid?: string) => Promise<void>;
+    waitUntilDeleted: (toEmail: string, fromUid?: string) => Promise<boolean>;
 }

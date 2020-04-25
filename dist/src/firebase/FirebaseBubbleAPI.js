@@ -29,10 +29,10 @@ class FirebaseBubbleAPI extends FirestoreAPI_1.FirestoreAPI {
             return !snap.exists;
         };
         this.pop = async (uid) => {
-            await this.bubbleRef(uid).update({ popped: true });
+            await this.bubbleRef(uid).update({ isPopped: true });
         };
         this.reset = async (uid) => {
-            await this.bubbleRef(uid).update({ popped: false });
+            await this.bubbleRef(uid).update({ isPopped: false });
         };
         this.isPopped = async (uid) => {
             const bubble = await this.get(uid);

@@ -1,6 +1,12 @@
 import {FirestoreAPI} from './FirestoreAPI';
 import {OutgoingInvitesAPI} from '../OutgoingInvitesAPI';
-import {App, CollectionReference, Query, QueryDocumentSnapshot, QuerySnapshot} from './FirestoreTypes';
+import {
+  App,
+  CollectionReference,
+  Query,
+  QueryDocumentSnapshot,
+  QuerySnapshot,
+} from './FirestoreTypes';
 import {Invite} from '../models';
 import {Observable} from 'rxjs';
 
@@ -12,7 +18,7 @@ export class FirebaseOutgoingInvitesAPI extends FirestoreAPI implements Outgoing
   protected outgoingInvitesRef = (fromUid: string = this.uid()): CollectionReference =>
     this.userRef(fromUid).collection('outgoingInvites');
 
-  protected outgoingInviteQuery = (fromUid: string = this.uid(), toEmail: string): Query =>
+  protected outgoingInviteQuery = (toEmail: string, fromUid: string = this.uid()): Query =>
     this.outgoingInvitesRef(fromUid).where('to', '==', toEmail);
 
   public observeAll = (fromUid?: string): Observable<Invite[]> => {
@@ -35,13 +41,13 @@ export class FirebaseOutgoingInvitesAPI extends FirestoreAPI implements Outgoing
     return ref.id;
   };
 
-  exists = async (toEmail: string, fromUid: string = this.uid()): Promise<boolean> => {
+  exists = async (toEmail: string, fromUid?: string): Promise<boolean> => {
     const query = await this.outgoingInvitesRef(fromUid).where('to', '==', toEmail).get();
     return query.size > 0;
   };
 
-  delete = async (fromUid: string, toEmail: string): Promise<void> => {
-    const query = await this.outgoingInviteQuery(fromUid, toEmail).get();
+  delete = async (toEmail: string, fromUid?: string): Promise<void> => {
+    const query = await this.outgoingInviteQuery(toEmail, fromUid).get();
     if (query.size === 0) {
       throw `Failed to delete outgoing invite in ${fromUid}
             to email ${toEmail}. Invite not found.`;
@@ -49,9 +55,9 @@ export class FirebaseOutgoingInvitesAPI extends FirestoreAPI implements Outgoing
     await query.docs.pop().ref.delete();
   };
 
-  waitUntilDeleted = async (fromUid: string, toEmail: string): Promise<boolean> => {
+  waitUntilDeleted = async (toEmail: string, fromUid?: string): Promise<boolean> => {
     const predicate = (qs: QuerySnapshot): boolean => qs.size === 0;
-    const snap = await this.waitUntilQuery(this.outgoingInviteQuery(fromUid, toEmail), predicate);
+    const snap = await this.waitUntilQuery(this.outgoingInviteQuery(toEmail, fromUid), predicate);
     return snap.size === 0;
   };
 }

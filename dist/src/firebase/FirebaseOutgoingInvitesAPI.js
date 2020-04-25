@@ -6,7 +6,7 @@ class FirebaseOutgoingInvitesAPI extends FirestoreAPI_1.FirestoreAPI {
     constructor(app) {
         super(app);
         this.outgoingInvitesRef = (fromUid = this.uid()) => this.userRef(fromUid).collection('outgoingInvites');
-        this.outgoingInviteQuery = (fromUid = this.uid(), toEmail) => this.outgoingInvitesRef(fromUid).where('to', '==', toEmail);
+        this.outgoingInviteQuery = (toEmail, fromUid = this.uid()) => this.outgoingInvitesRef(fromUid).where('to', '==', toEmail);
         this.observeAll = (fromUid) => {
             return new rxjs_1.Observable((observer) => 
             // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -20,21 +20,21 @@ class FirebaseOutgoingInvitesAPI extends FirestoreAPI_1.FirestoreAPI {
             const ref = await this.outgoingInvitesRef(invite.from).add(invite);
             return ref.id;
         };
-        this.exists = async (toEmail, fromUid = this.uid()) => {
+        this.exists = async (toEmail, fromUid) => {
             const query = await this.outgoingInvitesRef(fromUid).where('to', '==', toEmail).get();
             return query.size > 0;
         };
-        this.delete = async (fromUid, toEmail) => {
-            const query = await this.outgoingInviteQuery(fromUid, toEmail).get();
+        this.delete = async (toEmail, fromUid) => {
+            const query = await this.outgoingInviteQuery(toEmail, fromUid).get();
             if (query.size === 0) {
                 throw `Failed to delete outgoing invite in ${fromUid}
             to email ${toEmail}. Invite not found.`;
             }
             await query.docs.pop().ref.delete();
         };
-        this.waitUntilDeleted = async (fromUid, toEmail) => {
+        this.waitUntilDeleted = async (toEmail, fromUid) => {
             const predicate = (qs) => qs.size === 0;
-            const snap = await this.waitUntilQuery(this.outgoingInviteQuery(fromUid, toEmail), predicate);
+            const snap = await this.waitUntilQuery(this.outgoingInviteQuery(toEmail, fromUid), predicate);
             return snap.size === 0;
         };
     }

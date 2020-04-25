@@ -50,11 +50,11 @@ export class FirebaseBubbleAPI extends FirestoreAPI implements BubbleAPI {
   };
 
   pop = async (uid?: string): Promise<void> => {
-    await this.bubbleRef(uid).update({popped: true});
+    await this.bubbleRef(uid).update({isPopped: true});
   };
 
   reset = async (uid?: string): Promise<void> => {
-    await this.bubbleRef(uid).update({popped: false});
+    await this.bubbleRef(uid).update({isPopped: false});
   };
 
   isPopped = async (uid?: string): Promise<boolean> => {
