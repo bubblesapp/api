@@ -1,3 +1,4 @@
+export * from './Alert';
 export * from './Bubble';
 export * from './Device';
 export * from './Friend';
