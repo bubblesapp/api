@@ -1,7 +1,7 @@
 import {FirestoreAPI} from './FirestoreAPI';
 import {App, CollectionReference, DocumentReference} from './FirestoreTypes';
 import {NewAlertsAPI} from '../NewAlertsAPI';
-import {NewAlert} from '../models/NewAlert';
+import {NewAlert} from '../models';
 
 export class FirebaseNewAlertsAPI extends FirestoreAPI implements NewAlertsAPI {
   constructor(app: App) {

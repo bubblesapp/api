@@ -7,15 +7,19 @@ const FirebaseBubbleAPI_1 = require("./FirebaseBubbleAPI");
 const FirestoreAPI_1 = require("./FirestoreAPI");
 const FirebaseDevicesAPI_1 = require("./FirebaseDevicesAPI");
 const FirebaseNotificationsAPI_1 = require("./FirebaseNotificationsAPI");
+const FirebaseAlertsAPI_1 = require("./FirebaseAlertsAPI");
+const FirebaseNewAlertsAPI_1 = require("./FirebaseNewAlertsAPI");
 class FirebaseAPI extends FirestoreAPI_1.FirestoreAPI {
-    constructor(app, profiles = new FirebaseProfilesAPI_1.FirebaseProfilesAPI(app), friends = new FirebaseFriendsAPI_1.FirebaseFriendsAPI(app), invites = new FirebaseInvitesAPI_1.FirebaseInvitesAPI(app), bubble = new FirebaseBubbleAPI_1.FirebaseBubbleAPI(app), devices = new FirebaseDevicesAPI_1.FirebaseDevicesAPI(app)) {
+    constructor(app, alerts = new FirebaseAlertsAPI_1.FirebaseAlertsAPI(app), bubble = new FirebaseBubbleAPI_1.FirebaseBubbleAPI(app), devices = new FirebaseDevicesAPI_1.FirebaseDevicesAPI(app), friends = new FirebaseFriendsAPI_1.FirebaseFriendsAPI(app), invites = new FirebaseInvitesAPI_1.FirebaseInvitesAPI(app), newAlerts = new FirebaseNewAlertsAPI_1.FirebaseNewAlertsAPI(app), profiles = new FirebaseProfilesAPI_1.FirebaseProfilesAPI(app)) {
         super(app);
         this.app = app;
-        this.profiles = profiles;
-        this.friends = friends;
-        this.invites = invites;
+        this.alerts = alerts;
         this.bubble = bubble;
         this.devices = devices;
+        this.friends = friends;
+        this.invites = invites;
+        this.newAlerts = newAlerts;
+        this.profiles = profiles;
         this.wait = async (milliseconds) => await new Promise((res) => {
             setTimeout(() => res(), milliseconds);
         });

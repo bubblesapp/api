@@ -4,13 +4,17 @@ import { InvitesAPI } from './InvitesAPI';
 import { BubbleAPI } from './BubbleAPI';
 import { DevicesAPI } from './DevicesAPI';
 import { NotificationsAPI } from './NotificationsAPI';
+import { AlertsAPI } from './AlertsAPI';
+import { NewAlertsAPI } from './NewAlertsAPI';
 export interface API {
-    profiles: ProfilesAPI;
-    friends: FriendsAPI;
-    invites: InvitesAPI;
+    alerts: AlertsAPI;
     bubble: BubbleAPI;
     devices: DevicesAPI;
+    friends: FriendsAPI;
+    invites: InvitesAPI;
+    newAlerts: NewAlertsAPI;
     notifications: NotificationsAPI;
+    profiles: ProfilesAPI;
     wait: (milliseconds: number) => Promise<void>;
     destroy: () => Promise<void>;
 }
