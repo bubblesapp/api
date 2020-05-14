@@ -6,6 +6,7 @@ import {DevicesAPI} from './DevicesAPI';
 import {NotificationsAPI} from './NotificationsAPI';
 import {AlertsAPI} from './AlertsAPI';
 import {NewAlertsAPI} from './NewAlertsAPI';
+import {LinksAPI} from './LinksAPI';
 
 export interface API {
   alerts: AlertsAPI;
@@ -16,6 +17,7 @@ export interface API {
   newAlerts: NewAlertsAPI;
   notifications: NotificationsAPI;
   profiles: ProfilesAPI;
+  links: LinksAPI;
   wait: (milliseconds: number) => Promise<void>;
   destroy: () => Promise<void>;
 }

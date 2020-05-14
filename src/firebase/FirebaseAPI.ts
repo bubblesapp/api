@@ -9,6 +9,7 @@ import {FirebaseDevicesAPI} from './FirebaseDevicesAPI';
 import {FirebaseNotificationsAPI} from './FirebaseNotificationsAPI';
 import {FirebaseAlertsAPI} from './FirebaseAlertsAPI';
 import {FirebaseNewAlertsAPI} from './FirebaseNewAlertsAPI';
+import {FirebaseLinksAPI} from './FirebaseLinksAPI';
 
 export class FirebaseAPI extends FirestoreAPI implements API {
   constructor(
@@ -18,6 +19,7 @@ export class FirebaseAPI extends FirestoreAPI implements API {
     public devices = new FirebaseDevicesAPI(app),
     public friends = new FirebaseFriendsAPI(app),
     public invites = new FirebaseInvitesAPI(app),
+    public links = new FirebaseLinksAPI(app),
     public newAlerts = new FirebaseNewAlertsAPI(app),
     public profiles = new FirebaseProfilesAPI(app),
   ) {
