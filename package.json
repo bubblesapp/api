@@ -1,6 +1,6 @@
 {
   "name": "@bubblesapp/api",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "API for Bubbles App",
   "main": "./dist/index.js",
   "files": [
