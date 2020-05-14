@@ -3,6 +3,7 @@ export * from './Bubble';
 export * from './Device';
 export * from './Friend';
 export * from './Invite';
+export * from './Link';
 export * from './NewAlert';
 export * from './NewInviteNotification';
 export * from './Notification';
