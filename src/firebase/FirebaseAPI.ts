@@ -10,12 +10,14 @@ import {FirebaseNotificationsAPI} from './FirebaseNotificationsAPI';
 import {FirebaseAlertsAPI} from './FirebaseAlertsAPI';
 import {FirebaseNewAlertsAPI} from './FirebaseNewAlertsAPI';
 import {FirebaseLinksAPI} from './FirebaseLinksAPI';
+import {FirebaseConfigAPI} from './FirebaseConfigAPI';
 
 export class FirebaseAPI extends FirestoreAPI implements API {
   constructor(
     public app: App,
     public alerts = new FirebaseAlertsAPI(app),
     public bubble = new FirebaseBubbleAPI(app),
+    public config = new FirebaseConfigAPI(app),
     public devices = new FirebaseDevicesAPI(app),
     public friends = new FirebaseFriendsAPI(app),
     public invites = new FirebaseInvitesAPI(app),

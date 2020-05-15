@@ -7,9 +7,11 @@ import { NotificationsAPI } from './NotificationsAPI';
 import { AlertsAPI } from './AlertsAPI';
 import { NewAlertsAPI } from './NewAlertsAPI';
 import { LinksAPI } from './LinksAPI';
+import { ConfigAPI } from './ConfigAPI';
 export interface API {
     alerts: AlertsAPI;
     bubble: BubbleAPI;
+    config: ConfigAPI;
     devices: DevicesAPI;
     friends: FriendsAPI;
     invites: InvitesAPI;
