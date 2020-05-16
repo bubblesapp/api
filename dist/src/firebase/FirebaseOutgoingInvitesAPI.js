@@ -8,10 +8,11 @@ class FirebaseOutgoingInvitesAPI extends FirestoreAPI_1.FirestoreAPI {
         this.outgoingInvitesRef = (fromUid = this.uid()) => this.userRef(fromUid).collection('outgoingInvites');
         this.outgoingInviteQuery = (toEmail, fromUid = this.uid()) => this.outgoingInvitesRef(fromUid).where('to', '==', toEmail);
         this.observeAll = (fromUid) => {
-            return new rxjs_1.Observable((observer) => 
-            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-            // @ts-ignore
-            this.outgoingInvitesRef(fromUid).onSnapshot((qs) => 
+            return new rxjs_1.Observable((observer) => this.outgoingInvitesRef(fromUid)
+                .orderBy('createdAt', 'desc')
+                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                // @ts-ignore
+                .onSnapshot((qs) => 
             // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore
             observer.next(qs.docs.map((doc) => doc.data())), (err) => observer.error(err), () => observer.complete()));

@@ -8,10 +8,11 @@ class FirebaseFriendsAPI extends FirestoreAPI_1.FirestoreAPI {
         this.friendsRef = (ofUid) => this.userRef(ofUid).collection('friends');
         this.friendRef = (friendUid, ofUid) => this.friendsRef(ofUid).doc(friendUid);
         this.observeAll = (ofUid) => {
-            return new rxjs_1.Observable((observer) => 
-            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-            // @ts-ignore
-            this.friendsRef(ofUid).onSnapshot((qs) => 
+            return new rxjs_1.Observable((observer) => this.friendsRef(ofUid)
+                .orderBy('lastMet', 'desc')
+                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                // @ts-ignore
+                .onSnapshot((qs) => 
             // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore
             observer.next(qs.docs.map((doc) => doc.data())), (err) => observer.error(err), () => observer.complete()));
