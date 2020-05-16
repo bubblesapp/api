@@ -24,7 +24,6 @@ export class FirebaseIncomingInvitesAPI extends FirestoreAPI implements Incoming
   public observeAll = (toUid?: string): Observable<Invite[]> => {
     return new Observable<Invite[]>((observer) =>
       this.incomingInvitesRef(toUid)
-        .orderBy('createdAt', 'asc')
         // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         // @ts-ignore
         .onSnapshot(

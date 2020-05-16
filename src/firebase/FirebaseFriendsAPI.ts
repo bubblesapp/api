@@ -25,7 +25,6 @@ export class FirebaseFriendsAPI extends FirestoreAPI implements FriendsAPI {
   public observeAll = (ofUid?: string): Observable<Friend[]> => {
     return new Observable<Friend[]>((observer) =>
       this.friendsRef(ofUid)
-        .orderBy('lastMet', 'asc')
         // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         // @ts-ignore
         .onSnapshot(
