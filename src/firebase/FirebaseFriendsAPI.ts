@@ -7,7 +7,7 @@ import {
   DocumentReference,
   DocumentSnapshot,
   QueryDocumentSnapshot,
-  QuerySnapshot
+  QuerySnapshot,
 } from './FirestoreTypes';
 import {Observable} from 'rxjs';
 
@@ -24,16 +24,18 @@ export class FirebaseFriendsAPI extends FirestoreAPI implements FriendsAPI {
 
   public observeAll = (ofUid?: string): Observable<Friend[]> => {
     return new Observable<Friend[]>((observer) =>
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      this.friendsRef(ofUid).onSnapshot(
-        (qs: QuerySnapshot) =>
-          // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-          // @ts-ignore
-          observer.next(qs.docs.map((doc: QueryDocumentSnapshot) => doc.data() as Friend)),
-        (err: Error) => observer.error(err),
-        () => observer.complete(),
-      ),
+      this.friendsRef(ofUid)
+        .orderBy('lastMet', 'desc')
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        .onSnapshot(
+          (qs: QuerySnapshot) =>
+            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+            // @ts-ignore
+            observer.next(qs.docs.map((doc: QueryDocumentSnapshot) => doc.data() as Friend)),
+          (err: Error) => observer.error(err),
+          () => observer.complete(),
+        ),
     );
   };
 

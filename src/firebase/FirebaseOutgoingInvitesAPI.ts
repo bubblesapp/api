@@ -23,16 +23,18 @@ export class FirebaseOutgoingInvitesAPI extends FirestoreAPI implements Outgoing
 
   public observeAll = (fromUid?: string): Observable<Invite[]> => {
     return new Observable<Invite[]>((observer) =>
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      this.outgoingInvitesRef(fromUid).onSnapshot(
-        (qs: QuerySnapshot) =>
-          // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-          // @ts-ignore
-          observer.next(qs.docs.map((doc: QueryDocumentSnapshot) => doc.data() as Invite)),
-        (err: Error) => observer.error(err),
-        () => observer.complete(),
-      ),
+      this.outgoingInvitesRef(fromUid)
+        .orderBy('createdAt', 'desc')
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        .onSnapshot(
+          (qs: QuerySnapshot) =>
+            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+            // @ts-ignore
+            observer.next(qs.docs.map((doc: QueryDocumentSnapshot) => doc.data() as Invite)),
+          (err: Error) => observer.error(err),
+          () => observer.complete(),
+        ),
     );
   };
 
