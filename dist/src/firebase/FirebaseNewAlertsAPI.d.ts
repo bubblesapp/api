@@ -6,7 +6,7 @@ export declare class FirebaseNewAlertsAPI extends FirestoreAPI implements NewAle
     constructor(app: App);
     protected newAlertsRef: (uid?: string) => CollectionReference;
     protected newAlertRef: (id: string, uid?: string) => DocumentReference;
-    sendAlert: (to: string[], message: string, uid?: string) => Promise<void>;
+    sendAlert: (to: string[], message: string, uid?: string) => Promise<string>;
     add: (newAlert: NewAlert, uid?: string) => Promise<string>;
     delete: (id: string, uid?: string) => Promise<void>;
 }

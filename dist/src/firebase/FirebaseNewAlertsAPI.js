@@ -19,6 +19,7 @@ class FirebaseNewAlertsAPI extends FirestoreAPI_1.FirestoreAPI {
                 createdBy: uid !== null && uid !== void 0 ? uid : this.uid(),
             };
             await ref.set(newAlert);
+            return ref.id;
         };
         this.add = async (newAlert, uid) => {
             const ref = await this.newAlertsRef(uid).add(newAlert);
