@@ -14,10 +14,10 @@ export class FirebaseNewAlertsAPI extends FirestoreAPI implements NewAlertsAPI {
   protected newAlertRef = (id: string, uid?: string): DocumentReference =>
     this.newAlertsRef(uid).doc(id);
 
-  sendAlert = async (to: string[], message: string, uid?: string): Promise<void> => {
+  sendAlert = async (to: string[], message: string, uid?: string): Promise<string> => {
     const ref = this.newAlertsRef(uid).doc();
     const alert: Alert = {
-      id: ref.id, // Alert has same id as NewAlert
+      id: ref.id, // Alert has same id as NewAlert - Important for UI
       message,
       createdAt: new Date().getTime(),
     };
@@ -27,6 +27,7 @@ export class FirebaseNewAlertsAPI extends FirestoreAPI implements NewAlertsAPI {
       createdBy: uid ?? this.uid(),
     };
     await ref.set(newAlert);
+    return ref.id;
   };
 
   add = async (newAlert: NewAlert, uid?: string): Promise<string> => {
