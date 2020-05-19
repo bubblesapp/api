@@ -26,7 +26,6 @@
   "types": "./dist/index.d.ts",
   "homepage": "https://github.com/bubblesapp/api#readme",
   "dependencies": {
-    "i18n-js": "^3.5.1",
     "rxjs": "^6.5.5"
   },
   "optionalDependencies": {
