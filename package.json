@@ -34,7 +34,7 @@
     "@react-native-firebase/auth": "^6.4.0",
     "@react-native-firebase/firestore": "^6.4.0",
     "firebase": "^7.13.2",
-    "firebase-admin": "^8.10.0"
+    "firebase-admin": "^11.4.1"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
